@@ -1,0 +1,9 @@
+======================== Detail Kategori =================================<br/>
+<%= link_to "Back to Home", root_path %>
+<%= link_to "Back to Category", categories_path %>
+<br/>
+Nama Kategori: <%= @category.category_name %>
+
+<br/>
+<p id="notice"><%= flash[:notice] %></p>
+<%= render "categories/shared/result_products", :products => @products, :category => @category %>

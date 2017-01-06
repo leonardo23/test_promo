@@ -1,0 +1,13 @@
+<%= f.label :item_code %>
+<%= f.text_field :item_code %>
+<%= f.label :item_description %>
+<%= f.text_field :item_description %>
+<%= f.label :item_quantity %>
+<%= f.text_field :item_quantity %>
+<%= f.label :item_price %>
+<%= f.text_field :item_price %>
+
+<%= f.fields_for :products, @category do |ff| %>
+	<%= hidden_field_tag :category, ff.object.id %>
+<% end %>
+<%= f.submit %>

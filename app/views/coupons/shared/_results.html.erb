@@ -1,0 +1,29 @@
+<p id="notice"><%= flash[:notice] %></p>
+<table border="1">
+	<tr>
+		<td>Kode Kupon</td>
+		<td>Description</td>
+		<td>Value Kupon</td>
+		<td>Active Start Kupon</td>
+		<td>Active End Kupon</td>
+		<td>User</td>
+	</tr>
+	<% if coupons.blank? %>
+		<tr>
+			<td colspan="6">Data tidak ditemukan</td>
+		</tr>
+	<% else %>
+		<% coupons.each do |coupon| %>
+			<tr>
+				<td><%= coupon.code_coupon %></td>
+				<td><%= coupon.description %></td>
+				<td><%= coupon.value_coupon %></td>
+				<td><%= coupon.start_date_active_coupon.localtime.strftime("%d %B %Y") %></td>
+				<td><%= coupon.end_date_active_coupon.localtime.strftime("%d %B %Y") %></td>
+				<td><%= coupon.user_coupon_value.email %></td>
+			</tr>
+		<% end %>
+	<% end %>
+</table>
+
+<%= link_to "Tambah Coupon", new_coupon_path %>

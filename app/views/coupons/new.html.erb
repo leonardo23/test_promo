@@ -1,0 +1,5 @@
+======================== Kupon =================================
+<p id="error"><%= flash[:error] %></p>
+<%= form_for @coupon, :url => coupons_path do |f| %>
+	<%= render "coupons/shared/form", :f => f %>
+<% end %>

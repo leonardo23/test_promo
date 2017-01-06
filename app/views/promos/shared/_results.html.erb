@@ -1,0 +1,25 @@
+<p id="notice"><%= flash[:notice] %></p>
+<table border="1">
+	<tr>
+		<td>Promo Description</td>
+		<td>Start Date From</td>
+		<td>End Date From</td>
+		<td>Detail Promo</td>
+	</tr>
+	<% if promos.blank? %>
+		<tr>
+			<td colspan="3">Data tidak ditemukan</td>
+		</tr>
+	<% else %>
+		<% promos.each do |promo| %>
+			<tr>
+				<td><%= promo.promo_description %></td>
+				<td><%= promo.start_date_promo.localtime.strftime("%d %B %Y") %></td>
+				<td><%= promo.end_date_promo.localtime.strftime("%d %B %Y") %></td>
+				<td><%= link_to "Detail", promo_path(promo) %></td>
+			</tr>
+		<% end %>
+	<% end %>
+</table>
+
+<%= link_to "Tambah Promo", new_promo_path %>

@@ -1,0 +1,29 @@
+<%= f.label :promo_description %>
+<%= f.text_field :promo_description %>
+<%= f.label :start_date_promo %>
+<%= f.text_field :start_date_promo %>
+<%= f.label :end_date_promo %>
+<%= f.text_field :end_date_promo %>
+<br/><br/>
+<table border="1">
+	<tr>
+		<td>Product</td>
+		<td>Target Promo</td>
+		<td>Value qty Promo</td>
+		<td>Value Diskon Promo</td>
+		<td>Value Price Promo</td>
+	</tr>
+	<% @products.each do |product| %>
+		<%= f.fields_for :promo_details, @promo_detail do |f_det| %>
+			<tr>
+				<td><%= f_det.hidden_field :product_id, :value => product.id %><%= "#{product.item_code} - #{product.item_description}" %></td>
+				<td><%= f_det.select :promo_target, [["Item","Item"],["Diskon","Diskon"],["Nominal","Nominal"]] %></td>
+				<td><%= f_det.text_field :value_promo %></td>
+				<td><%= f_det.text_field :value_discount %></td>
+				<td><%= f_det.text_field :value_price %></td>
+			</tr>
+		<% end %>
+	<% end %>
+</table>
+<br/>
+<%= f.submit %>

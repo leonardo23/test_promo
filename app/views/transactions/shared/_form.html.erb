@@ -1,0 +1,49 @@
+<%= f.label :transaction_number %>
+<%= f.text_field :transaction_number %>
+Promo :
+<%= f.select :promo_id, @promo.collect{|promo| [promo.promo_description, promo.id] }, :onchange => "get_promo(this)" %>
+<br/><br/>
+<table border="1" width="75%">
+	<tr>
+		<td>Item Code</td>
+		<td>Item Description</td>
+		<td>Quantity</td>
+		<td>Status Promo</td>
+		<td>Harga</td>
+		<td>Total</td>
+	</tr>
+	<% @promo_details.each do |promo_detail| %>
+		<%= f.fields_for :detail_transactions, @detail_transaction do |det_trans| %>
+			<tr>
+				<td>
+					<%= det_trans.hidden_field :promo_detail_id, :value => promo_detail.id %>
+					<%= promo_detail.product.item_code %>
+				</td>
+				<td><%= promo_detail.product.item_description %></td>
+				<td><%= det_trans.text_field :quantity, :onkeyup => "get_total(this, #{promo_detail.promo.id}, #{promo_detail.id})" %></td>
+				<td><%= promo_detail.promo.promo_description %></td>
+				<td><span class="item_price"><%= promo_detail.product.item_price %></span></td>
+				<td><span class="total">0</span></td>
+			</tr>
+		<% end %>
+	<% end %>
+	<tr>
+		<td colspan="4">Grand Total:</td>
+		<td><%= total_price(@promo_details) %></td>
+		<td><span class="grand_total">0</span></td>
+	</tr>
+	<tr>
+		<td colspan="4">Type Pembayaran:</td>
+		<td colspan="2">
+			<%= f.radio_button :payment_type, "coupon" %> Coupon
+		</td>
+	</tr>
+	<tr>
+		<td colspan="4">Code Kupon:</td>
+		<td colspan="2">
+			<%= f.text_field :code_coupon %>
+		</td>
+	</tr>
+</table>
+<br/>
+<%= f.submit "Buy" %>

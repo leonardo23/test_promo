@@ -1,0 +1,5 @@
+======================== Tambah Produk =================================
+<p id="error"><%= flash[:error] %></p>
+<%= form_for @product, :url => products_path do |f| %>
+	<%= render "products/shared/form", :f => f, :category => @category %>
+<% end %>

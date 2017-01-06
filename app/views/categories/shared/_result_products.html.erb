@@ -1,0 +1,22 @@
+<table border="1">
+	<tr>
+		<td>Kode Produk</td>
+		<td>Nama Produk</td>
+		<td>Created By</td>
+	</tr>
+	<% if products.blank? %>
+		<tr>
+			<td colspan="3">Data tidak ditemukan</td>
+		</tr>
+	<% else %>
+		<% products.each do |product| %>
+			<tr>
+				<td><%= product.item_code %></td>
+				<td><%= product.item_description %></td>
+				<td><%= product.created_by_user.email %></td>
+			</tr>
+		<% end %>
+	<% end %>
+</table>
+
+<%= link_to "Tambah Product", new_product_path(:category => category) %>

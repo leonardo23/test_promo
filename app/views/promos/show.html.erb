@@ -1,0 +1,30 @@
+Promo : <%= @promo.promo_description %>
+
+<br/><br/><br/>
+Detail Promo<br/>
+========================
+<br/><br/>
+<table border="1">
+	<tr>
+		<td>Product</td>
+		<td>Target Promo</td>
+		<td>Value qty Promo</td>
+		<td>Value Diskon Promo</td>
+		<td>Value Nominal Promo</td>
+	</tr>
+	<% if @promo.promo_details.blank? %>
+		<tr>
+			<td colspan="5">Data tidak ditemukan</td>
+		</tr>
+	<% else %>
+		<% @promo.promo_details.each do |promo_detail| %>
+			<tr>
+				<td><%= promo_detail.product.item_description %></td>
+				<td><%= promo_detail.promo_target %></td>
+				<td><%= promo_detail.value_promo %></td>
+				<td><%= promo_detail.value_discount %></td>
+				<td><%= promo_detail.value_price %></td>
+			</tr>
+		<% end %>
+	<% end %>
+</table>

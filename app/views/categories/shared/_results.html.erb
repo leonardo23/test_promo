@@ -1,0 +1,21 @@
+<p id="notice"><%= flash[:notice] %></p>
+<table border="1">
+	<tr>
+		<td>Nama Kategori</td>
+		<td>Created By</td>
+	</tr>
+	<% if categories.blank? %>
+		<tr>
+			<td colspan="2">Data tidak ditemukan</td>
+		</tr>
+	<% else %>
+		<% categories.each do |cat| %>
+			<tr>
+				<td><%= link_to "#{cat.category_name}", category_path(cat) %></td>
+				<td><%= cat.created_by_user.email %></td>
+			</tr>
+		<% end %>
+	<% end %>
+</table>
+
+<%= link_to "Tambah Kategory", new_category_path %>

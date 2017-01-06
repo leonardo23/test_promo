@@ -1,0 +1,5 @@
+======================== Tambah Kategori ================================= <br/>
+<p id="error"><%= flash[:error] %></p>
+<%= form_for @category, :url => categories_path do |f| %>
+	<%= render 'categories/shared/form', :f => f %>
+<% end %>

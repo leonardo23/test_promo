@@ -1,0 +1,5 @@
+======================== PROMO =================================
+<p id="error"><%= flash[:error] %></p>
+<%= form_for @promo, :url => promos_path do |f| %>
+	<%= render "promos/shared/form", :f => f %>
+<% end %>
