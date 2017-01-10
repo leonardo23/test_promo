@@ -1,0 +1,5 @@
+<% if params[:val] == "Persen" %>
+  <%= text_field_tag "promo[promo_details_attributes][#{params[:row]}][value_target]" %>
+<% else %>
+	<%= select_tag "promo[promo_details_attributes][#{params[:row]}][value_target]", options_for_select(@products.collect{|prod| ["(#{prod.vendor.vendor_name}) #{prod.item_code} - #{prod.item_description}", prod.id] }) %>
+<% end %>

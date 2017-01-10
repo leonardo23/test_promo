@@ -5,6 +5,7 @@ class CreateProducts < ActiveRecord::Migration
     	t.string :item_code
     	t.string :item_description
       t.integer :item_quantity
+      t.integer :vendor_id
       t.decimal :item_price, precision: 12, scale: 2
     	t.integer :created_by
     	t.integer :updated_by

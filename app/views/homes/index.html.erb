@@ -1,12 +1,23 @@
 Master
 <ul>
+	<li> <%= link_to "Vendor", vendors_path %></li>
 	<li> <%= link_to "Category", categories_path %> </li>
 	<li> <%= link_to "Promo", promos_path %> </li>
 	<li> <%= link_to "Coupon", coupons_path %> </li>
 </ul>
 <br/>
 
-Transaction
+List Barang
+<%= render "homes/shared/results", :products => @products %>
+
+<br/><br/>
+
+Cart
 <ul>
-	<li> <%= link_to "Transaction", transactions_path %> </li>
+	<li><%= link_to "My Cart", carts_path %></li>
 </ul>
+<!--Transaction -->
+<!--ul>
+	<li> <%#= link_to "Transaction", transactions_path %> </li>
+</ul-->
+

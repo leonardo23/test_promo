@@ -1,0 +1,35 @@
+<%= f.label :transaction_number %>
+<%= f.text_field :transaction_number, :value => @cart.get_transaction_number(current_user)[:transaction_number] %>
+
+<br/>
+<%= f.fields_for :cart_details, @cart_details do |cart_detail| %>
+	<br/></br/>
+	Status Promo : <%= product.promo_description %><br/><br/>
+	Quantity : <%= cart_detail.text_field :quantity %> <br/>
+	<%= cart_detail.hidden_field :product_id, :value => product.id %>
+<% end %>
+<table>
+	<tr>
+		<td>Kode Item</td>
+		<td>Nama Item</td>
+		<td>Quantity</td>
+		<td>Status Barang</td>
+	</tr>
+	<% if @current_cart.blank? && @current_cart.cart_details.blank? %>
+		<tr>
+			<td colspan="4">Data tidak ditemukan.</td>
+		</tr>
+	<% else %>
+		<% @history_cart_details.each do |cart_detail| %>
+			<tr>
+				<td><%= cart_detail.product.item_code %></td>
+				<td><%= cart_detail.product.item_description %></td>
+				<td><%= cart_detail.quantity %></td>
+				<td><%= cart_detail.available_qty %></td>
+			</tr>
+		<% end %>
+	<% end %>
+</table>
+<br/><br/>
+
+<%= f.submit "Add to Cart" %>

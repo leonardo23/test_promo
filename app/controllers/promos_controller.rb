@@ -7,7 +7,7 @@ class PromosController < ApplicationController
 		@promo = Promo.new
 		@promo_detail = PromoDetail.new
 		@promo.promo_details.build
-		@products = Product.order("created_at DESC")
+		@products = Product.where("products.id NOT IN (SELECT value_promo FROM promo_details WHERE is_active = true)")
 	end
 
 	def create
@@ -25,15 +25,13 @@ class PromosController < ApplicationController
 		@promo = Promo.find(params[:id])
 	end
 
-	def get_promo_by_qty
-		promo = Promo.find(params[:id])
-		@promo = promo.promo_details.find(params[:promo_detail]).check_current_promo(params[:qty])
-		render :layout => false, :text => @promo
+	def get_promo_target
+		@products = Product.where("products.id NOT IN (SELECT value_promo FROM promo_details WHERE is_active = true)")
+		render :layout => false
 	end
 
 	private
-
 	def params_promo
-		params.require(:promo).permit(:promo_description, :start_date_promo, :end_date_promo, :promo_details_attributes => [:product_id, :promo_target, :value_promo, :value_discount, :value_price])
+		params.require(:promo).permit(:code_promo, :promo_description, :start_date_promo, :end_date_promo, :promo_details_attributes => [:type_promo, :value_promo, :quantity_promo, :type_target, :value_target, :quantity_target])
 	end
 end

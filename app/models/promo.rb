@@ -12,4 +12,8 @@ class Promo < ActiveRecord::Base
     errors.add(:start_date_promo, 'Format tanggal tidak valid') if self.start_date_promo.present? && !self.start_date_promo.to_date.is_a?(Date)
     errors.add(:end_date_promo, 'Format tanggal tidak valid') if self.end_date_promo.present? && !self.end_date_promo.to_date.is_a?(Date)
   end
+
+  def check_expired_promo
+  	Time.now.to_date >= self.start_date_promo.to_date && Time.now.to_date <= self.end_date_promo
+  end
 end

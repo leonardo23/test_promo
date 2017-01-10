@@ -7,10 +7,12 @@ Detail Promo<br/>
 <table border="1">
 	<tr>
 		<td>Product</td>
-		<td>Target Promo</td>
-		<td>Value qty Promo</td>
-		<td>Value Diskon Promo</td>
-		<td>Value Nominal Promo</td>
+		<td>Type Promo</td>
+		<td>Qty Promo</td>
+		<td>Type Target</td>
+		<td>Value Target</td>
+		<td>Quantity Target</td>
+		<td>Option</td>
 	</tr>
 	<% if @promo.promo_details.blank? %>
 		<tr>
@@ -19,12 +21,15 @@ Detail Promo<br/>
 	<% else %>
 		<% @promo.promo_details.each do |promo_detail| %>
 			<tr>
-				<td><%= promo_detail.product.item_description %></td>
-				<td><%= promo_detail.promo_target %></td>
-				<td><%= promo_detail.value_promo %></td>
-				<td><%= promo_detail.value_discount %></td>
-				<td><%= promo_detail.value_price %></td>
+				<td><%= promo_detail.product_value.item_description %></td>
+				<td><%= promo_detail.type_promo %></td>
+				<td><%= promo_detail.quantity_promo %></td>
+				<td><%= promo_detail.type_target %></td>
+				<td><%= promo_detail.value_target %></td>
+				<td><%= promo_detail.quantity_target %></td>
+				<td><%= link_to "Remove Promo", "#" %></td>
 			</tr>
 		<% end %>
 	<% end %>
 </table>
+<br/>

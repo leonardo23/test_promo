@@ -1,8 +1,10 @@
 <table border="1">
 	<tr>
+		<td>Vendor</td>
 		<td>Kode Produk</td>
 		<td>Nama Produk</td>
-		<td>Created By</td>
+		<td>Qty</td>
+		<td>Harga Satuan</td>
 	</tr>
 	<% if products.blank? %>
 		<tr>
@@ -11,9 +13,11 @@
 	<% else %>
 		<% products.each do |product| %>
 			<tr>
+				<td><%= product.vendor.vendor_name %></td>
 				<td><%= product.item_code %></td>
 				<td><%= product.item_description %></td>
-				<td><%= product.created_by_user.email %></td>
+				<td><%= product.item_quantity %></td>
+				<td><%= product.item_price %></td>
 			</tr>
 		<% end %>
 	<% end %>

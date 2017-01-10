@@ -1,26 +1,36 @@
+<%= f.label :code_promo %>
+<%= f.text_field :code_promo %>
 <%= f.label :promo_description %>
 <%= f.text_field :promo_description %>
 <%= f.label :start_date_promo %>
-<%= f.text_field :start_date_promo %>
+<%= f.date_field :start_date_promo %>
 <%= f.label :end_date_promo %>
-<%= f.text_field :end_date_promo %>
+<%= f.date_field :end_date_promo %>
 <br/><br/>
 <table border="1">
 	<tr>
-		<td>Product</td>
-		<td>Target Promo</td>
-		<td>Value qty Promo</td>
-		<td>Value Diskon Promo</td>
-		<td>Value Price Promo</td>
+		<td>Select</td>
+		<td>Product Promo</td>
+		<td>Type Promo</td>
+		<td>Qty Promo</td>
+		<td>Type Target</td>
+		<td>Value Target</td>
+		<td>Qty Target</td>
 	</tr>
-	<% @products.each do |product| %>
+	<% @products.each_with_index do |product, i| %>
 		<%= f.fields_for :promo_details, @promo_detail do |f_det| %>
 			<tr>
-				<td><%= f_det.hidden_field :product_id, :value => product.id %><%= "#{product.item_code} - #{product.item_description}" %></td>
-				<td><%= f_det.select :promo_target, [["Item","Item"],["Diskon","Diskon"],["Nominal","Nominal"]] %></td>
-				<td><%= f_det.text_field :value_promo %></td>
-				<td><%= f_det.text_field :value_discount %></td>
-				<td><%= f_det.text_field :value_price %></td>
+				<td><%= check_box_tag "select_promo_product[#{i}]", i, false, :onclick => "get_enable_disable_promo_product(this)"  %></td>
+				<td><%= f_det.select :value_promo, @products.collect{|prod| ["(#{prod.vendor.vendor_name}) #{prod.item_code} - #{prod.item_description}", prod.id] }, {}, :disabled => true %></td>
+				<td><%= f_det.select :type_promo, [["Produk","Produk"]], {}, :disabled => true %></td>
+				<td><%= f_det.text_field :quantity_promo, :disabled => true %></td>
+				<td><%= f_det.select :type_target, [["Barang","Barang"],["Persen", "Persen"]], {}, :onchange => "get_type_target(this, #{i})", :disabled => true %></td>
+				<td>
+					<span class="type_target">
+						<%= f_det.select :value_target, @products.collect{|prod| ["(#{prod.vendor.vendor_name}) #{prod.item_code} - #{prod.item_description}", prod.id] }, :disabled => true %>
+					</span>
+				</td>
+				<td><%= f_det.text_field :quantity_target, :disabled => true %></td>
 			</tr>
 		<% end %>
 	<% end %>

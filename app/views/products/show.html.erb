@@ -1,0 +1,7 @@
+====================== Detail Product ===================== <br/><br/>
+Nama Produk : <%= @product.item_description %>
+
+<br/><br/>
+<%= form_for @cart, :url => carts_path do |f| %>
+	<%= render "carts/shared/form", :f => f, :product => @product %>
+<% end %>

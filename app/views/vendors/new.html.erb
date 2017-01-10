@@ -1,0 +1,5 @@
+======================== Vendor =================================
+<p id="error"><%= flash[:error] %></p>
+<%= form_for @vendor, :url => vendors_path do |f| %>
+	<%= render "vendors/shared/form", :f => f %>
+<% end %>

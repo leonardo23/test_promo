@@ -1,0 +1,19 @@
+<p id="notice"><%= flash[:notice] %></p>
+<table border="1">
+	<tr>
+		<td>Vendor Name</td>
+	</tr>
+	<% if vendors.blank? %>
+		<tr>
+			<td colspan="6">Data tidak ditemukan</td>
+		</tr>
+	<% else %>
+		<% vendors.each do |vendor| %>
+			<tr>
+				<td><%= vendor.vendor_name %></td>
+			</tr>
+		<% end %>
+	<% end %>
+</table>
+
+<%= link_to "Tambah vendor", new_vendor_path %>

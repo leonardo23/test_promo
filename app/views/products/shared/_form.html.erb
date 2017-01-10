@@ -6,6 +6,8 @@
 <%= f.text_field :item_quantity %>
 <%= f.label :item_price %>
 <%= f.text_field :item_price %>
+<%= f.label :vendor %>
+<%= f.select :vendor_id, @vendors.collect{|vendor| [vendor.vendor_name, vendor.id] } %>
 
 <%= f.fields_for :products, @category do |ff| %>
 	<%= hidden_field_tag :category, ff.object.id %>

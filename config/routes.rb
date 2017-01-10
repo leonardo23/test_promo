@@ -33,12 +33,14 @@ Rails.application.routes.draw do
 
      resources :coupons
      resources :promos do
-       member do
-        get :get_promo_by_qty
+       collection do
+         get :get_promo_target
        end
      end
 
      resources :transactions
+     resources :vendors
+     resources :carts
   # Example resource route with more complex sub-resources:
   #   resources :products do
   #     resources :comments
